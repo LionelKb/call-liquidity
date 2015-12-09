@@ -1,5 +1,6 @@
 <?php
     $id_history =  1;
+    $new_var = "toto";
     $connect = mysqli_connect("localhost","root","");
 	$db = mysqli_select_db($connect,"call_for_liquidity");
 	$sql = mysqli_query($connect,"SELECT DISTINCT rate FROM offers WHERE id_history = '$id_history' ORDER BY rate DESC");

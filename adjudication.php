@@ -63,12 +63,4 @@
 			echo '</br>';
 		}
 	}
-	foreach($banks as $rate => $banks_amount)
-	{
-		foreach($banks_amount as $banks => $amount)
-		{
-			echo $amount;
-			echo '</br>';
-		}
-	}
 ?>

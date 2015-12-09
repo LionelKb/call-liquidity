@@ -63,11 +63,14 @@
 			echo '</br>';
 		}
 	}
+	echo $i;
 	foreach($banks as $rate => $bank_amount)
 	{
 		foreach($bank_amount as $banks => $amount)
 		{
-			if($bank_amount == $i)
+			/*if($bank_amount == $i)*/
+			if($rate == $i)
+
 			{
 				echo $amount;
 				echo '</br>';

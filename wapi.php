@@ -3,8 +3,8 @@
     $connect = mysqli_connect("localhost","root","");
 	$db = mysqli_select_db($connect,"call_for_liquidity");
 	$sql = mysqli_query($connect,"SELECT DISTINCT rate FROM offers WHERE id_history = '$id_history' ORDER BY rate DESC");
-	$rates = array();
-	$banks = array();
+	$rates = array() ;
+	$banks = array() ;
 	$cumul = array();
 	while($rate_tab = mysqli_fetch_array($sql))
 	{

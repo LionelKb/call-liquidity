@@ -5,6 +5,7 @@
 	$sql = mysqli_query($connect,"SELECT DISTINCT rate FROM offers WHERE id_history = '$id_history' ORDER BY rate DESC");
 	$rates = array();
 	$banks = array();
+	$totals = array();
 	while($rate_tab = mysqli_fetch_array($sql))
 	{
 		$rate = $rate_tab['rate'];
@@ -53,28 +54,44 @@
 	echo '<pre>';
 	print_r($final);
 	echo '</pre>';
+	/*adjudication*/
+	echo '</br>';
+	echo "ADJUDICATION</br>";
+	echo "----------------------</br>";
 	$i = 0;
+	$j = 0;
+	$adjud_rate =0;
+	$ad_amount = 0;
+	$adjud = $banks;
 	foreach($residuel as $rate => $amount)
 	{
-		if($amount < 0)
+		if ($amount > 0)
 		{
-			$temp[]=$rate;//rate où le résiduel est négatif
+			$j = $rate;
+			$ad_amount = $amount;
+		}
+		if($amount <= 0)
+		{
+			$temp[]=$rate;//tableau de rate où le résiduel est nul et/ou négatif
 			$i = max($temp);
-			echo '</br>';
 		}
 	}
-	echo $i;
-	foreach($banks as $rate => $bank_amount)
+	foreach($adjud as $rate => $adjud_amount)
 	{
-		foreach($bank_amount as $banks => $amount)
+		foreach($adjud_amount as $banks => $amount)
 		{
-			/*if($bank_amount == $i)*/
-			if($rate == $i)
-
+			/*if($adjud_amount == $i)*/
+			if($rate < $i)
 			{
-				echo $amount;
-				echo '</br>';
+				$adjud[$rate][$banks]= 0;//annulation des montants non adjugés
+			}
+			if($residuel[$j] >0 and $residuel[$i] < 0)
+			{
+				$adjud[$i][$banks] = $amount*$ad_amount/$totals[$i];
 			}
 		}
 	}
+	echo '<pre>';
+	print_r($adjud);
+	echo'</pre>';
 ?>

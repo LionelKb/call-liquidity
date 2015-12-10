@@ -94,4 +94,26 @@
 	echo '<pre>';
 	print_r($adjud);
 	echo'</pre>';
+	/*notifications*/
+	echo "NOTIFICATION!";
+	echo '</br>';
+	foreach ($adjud as $rate => $adjud_amount)
+	{
+		foreach($adjud_amount as $adjud => $amount)
+		{
+			if($amount > 0)
+			{
+				$adjud_banks[$adjud][$rate] = $amount;// tableau contenant les montants adjugés classés par banque
+			}
+		}
+	}
+	echo '<pre>';
+	print_r($adjud_banks);
+	echo '</pre>';
+	for($offset=0;$offset<sizeof($adjud_banks);$offset++)
+	{
+		echo '<pre>';
+		print_r(array_slice($adjud_banks,$offset,true));//montants adjugé d'une banque
+		echo '</pre>';
+	}
 ?>

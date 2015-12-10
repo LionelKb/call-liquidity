@@ -29,6 +29,7 @@
 			}
 		}
 	}
+	$offers = $banks;
 	$previous_rate = 0;
 	$cumul[$previous_rate] = 0;
 	$cumulf = array();
@@ -110,10 +111,47 @@
 	echo '<pre>';
 	print_r($adjud_banks);
 	echo '</pre>';
+	$key_notify = array();
 	for($offset=0;$offset<sizeof($adjud_banks);$offset++)
 	{
+		/*echo '<pre>';
+		print_r(array_slice($adjud_banks,$offset,true));
+		echo '</pre>';*/
+		$notify_banks = array_slice($adjud_banks,$offset,true);
+        $key_adjud = key($notify_banks);
+    }
+    /*notification par banque*/
+    $banks_2 = array();
+    foreach($offers as $rate => $amount)
+    {
+    	foreach($amount as $offers=> $amount)
+    	{
+    		$banks_2 [$offers][$rate] = $amount;
+    	}
+    }
+    echo '<pre>';
+	print_r($banks_2);
+	echo '</pre>';
+	echo "LES BANQUES ET LEURS OFFRES";
+	for($offset=0;$offset<sizeof($banks_2);$offset++)
+	{
 		echo '<pre>';
-		print_r(array_slice($adjud_banks,$offset,true));//montants adjugé d'une banque
+		print_r(array_slice($banks_2,$offset,true));
 		echo '</pre>';
-	}
+		$offers_banks = array_slice($banks_2,$offset);//tableau de chaque banque et ses offres
+        $key_submit = key($offers_banks);
+    }
+    $notification = array();
+    $sql4 = "select distinct name FROM banks";
+    $res4 = mysqli_query($connect,$sql4);
+    while($bank_names = mysqli_fetch_array($res4))
+    {
+    	if($key_submit==$bank_names['name'] and $key_adjud == $bank_names['name'])
+    	{
+    		$notification = array($offers_banks,$notify_banks);
+    	}
+    }
+    echo '<pre>';
+	print_r($notification);
+	echo '</pre>';
 ?>

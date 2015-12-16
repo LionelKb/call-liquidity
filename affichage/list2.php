@@ -25,6 +25,11 @@
     		<div id= "left">
     			<label>Liste des offres</label>
     		</div>
+            <div id="right">
+                <div id="content">
+                    <a href="logout.php?logout">Acceuil</a>
+                </div>
+            </div>
     	</div>
         <div class="public">
         	<?php

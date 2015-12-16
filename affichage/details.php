@@ -21,7 +21,7 @@
     		</div>
                 <div id="right">
                     <div id="content">
-                        <a href="logout.php?logout">Liste des offres</a>
+                        <a href="logout.php?logout">Acceuil</a>
                     </div>
                 </div>
     	</div>
@@ -64,10 +64,10 @@
     			{
     				echo '<tr>';
     				echo '<td>'.$i++.'</td>';
-    				echo '<td>'.$amount.' BIF</td>';
+    				echo '<td>'.number_format($amount,0,',',' ').' BIF</td>';
     				echo '<td>'.$rate.'</td>';
-    				echo '<td>'.$aw_amount[$rate].' BIF</td>';
-    				echo '<td>'.$interest[$rate].' BIF</td>';
+    				echo '<td>'.number_format($aw_amount[$rate],0,',',' ').' BIF</td>';
+    				echo '<td>'.number_format($interest[$rate],0,',',' ').' BIF</td>';
     				echo '</tr>';
     			}
     			?>

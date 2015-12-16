@@ -46,6 +46,24 @@
 		}
 	}
 	$banks=$awards;
-    $av_rate = array_sum($rates)/sizeof($rates);
-    $marg_rate = array_sum($rates);
+	$banking = $awards;
+	foreach($banking as $rate => $amount)
+	{
+		foreach($amount as $banking => $amount)
+		{
+			if ($amount > 0)
+			{
+			    $pond[$rate] = $amount * $rate;
+			    $rate_m[] = $rate;
+			}
+		}
+	}
+	$tots = array_sum($totals);
+	$ponds = array_sum($pond);
+	$av_rate = $ponds / $tots;
+	/*echo '<pre>';
+	print_r($pond);
+	echo '</pre>';
+	echo $rating;*/
+    $marg_rate = min($rate_m);
 ?>

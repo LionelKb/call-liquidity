@@ -26,9 +26,9 @@
 	/*echo '<pre>';
 	print_r($submit_banks);
 	echo '</pre>';*/
-	echo '<pre>';
+	/*echo '<pre>';
 	print_r($adjud_banks);
-	echo '</pre>';
+	echo '</pre>';*/
 	$award = array();
 	$offer_bank = array();
 	for($offset=0;$offset<=sizeof($adjud_banks);$offset++)

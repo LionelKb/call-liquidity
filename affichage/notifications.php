@@ -19,7 +19,7 @@
     		</div>
             <div id="right">
                 <div id="content">
-                    <a href="logout.php?logout">Liste des offres</a>
+                    <a href="logout.php?logout">Acceuil</a>
                 </div>
             </div>
     	</div>

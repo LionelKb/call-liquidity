@@ -1,6 +1,7 @@
 <?php
-    include "dbconnect.php";
-    $id_history = 1;
+    session_start();
+    include_once "dbconnect.php";
+    $id_history = $_SESSION['history'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,13 +16,18 @@
             <div id= "left">
                 <label>Dépouillement des offres de liquidités</label>
             </div>
+            <div id="right">
+                <div id="content">
+                    <a href="logout.php?logout">Liste des offres</a>
+                </div>
+            </div>
         </div>
         <div class= "title">
     	<div>
     		<?php
                 include "info.php";
                 echo"<table>";
-                echo ("<tr><td>Montant du prêt (en BIF): ".$intervention_amount."</td></tr>");
+                echo ("<tr><td>Montant du prêt (en BIF): ".number_format($intervention_amount,0,',',' ')."</td></tr>");
                 echo ("<tr><td>Soumission à taux libre</td></tr>");
                 echo ("<tr><td>Adjudication : taux multiples</td></tr>");
                 echo ("<tr><td>Nombre maximum d'offres par banques: 5</td></tr>");
@@ -31,12 +37,13 @@
             <h4><?php echo "Semaine du $debut au $maturity" ?></h4>
     	</div>
     	<div class="container">
+            <center>
     		<table class="table-form">
     			<thead>
     			<tr>
     				<th><strong>Taux</strong></th>
     				<?php
-    				    $get_banks = mysqli_query($connect,"select distinct name from banks ORDER BY name");
+    				    $get_banks = mysqli_query($connect,"select DISTINCT name FROM banks inner join offers on banks.id = offers.id_bank where offers.id_history=id_history ORDER BY name;");
     				    $banks = array();
     				    while($result = mysqli_fetch_array($get_banks))
     				    {
@@ -68,8 +75,9 @@
     			    }
     			?>
     		</table>
+        </center>
+        <button class="work" id="righty"><a href="awards.php" id="link_right">Adjudication</a></button>
     	</div>
         </div>
-    	<a href="awards.php" id="link_right">Adjudication</a>
     </body>
 </html>

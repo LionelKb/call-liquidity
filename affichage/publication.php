@@ -1,6 +1,7 @@
 <?php
-    include "dbconnect.php";
-    $id_history = 1;
+    session_start();
+    include_once "dbconnect.php";
+    $id_history = $_SESSION['history'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,11 @@
     		<div id= "left">
     			<label>Publication des résultats</label>
     		</div>
+    		<div id="right">
+                <div id="content">
+                    <a href="logout.php?logout">Liste des offres</a>
+                </div>
+            </div>
     	</div>
     	<?php
             include"info.php";
@@ -83,13 +89,13 @@
 
                     <tr><td><li>Montant total adjugé/ Total des offres </td><td> : <?php echo array_sum($totals)/array_sum($startin_offers)*100 ?></td></li></tr>
 
-					<tr><td><li>Taux marginal </td><td>  : <?php echo "Taux marginal" ?></td></li></tr>
+					<tr><td><li>Taux marginal </td><td>  : <?php echo $marg_rate ?></td></li></tr>
 
-					<tr><td><li>Taux minimum offert </td><td> : <?php echo min($rates) ?></td></li></tr>
+					<tr><td><li>Taux minimum offert </td><td> : <?php echo min($rates); ?></td></li></tr>
 
-					<tr><td><li>Taux maximum offert </td><td>: <?php echo max($rates) ?></td></li></tr>
+					<tr><td><li>Taux maximum offert </td><td>: <?php echo max($rates); ?></td></li></tr>
 
-					<tr><td><li>Taux moyen pondéré</td><td> : <?php $r_moy ?></td></li></tr>
+					<tr><td><li>Taux moyen pondéré</td><td> : <?php echo $av_rate; ?></td></li></tr>
 				</ol>
 			    </table>
         </div>

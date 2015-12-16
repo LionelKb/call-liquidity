@@ -6,7 +6,7 @@
     			    {
     			    	$rate = $rate_tab['rate'];
     			    	$rates[] = $rate_tab['rate'];
-    			    	$sql2 = "SELECT DISTINCT name FROM banks ORDER BY name;";
+    			    	$sql2 = "select DISTINCT name FROM banks inner join offers on banks.id = offers.id_bank where offers.id_history=id_history ORDER BY name;";
     			    	$res1 = mysqli_query($connect,$sql2);
     			    	while($result = mysqli_fetch_array($res1))
     			    	{

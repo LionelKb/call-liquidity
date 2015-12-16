@@ -7,7 +7,7 @@
 			{
 				$adjud_banks[$awards][$rate] = $amount;
 			}
-			if($resid[$rate]<0 and $submit[$rate][$awards]>0)
+			if($residuals[$rate]=0 and $submit[$rate][$awards]>0)
 			{
 				$adjud_banks[$awards][$rate] = 0;
 			}
@@ -25,10 +25,10 @@
 	}
 	/*echo '<pre>';
 	print_r($submit_banks);
-	echo '</pre>';
+	echo '</pre>';*/
 	echo '<pre>';
 	print_r($adjud_banks);
-	echo '</pre>';*/
+	echo '</pre>';
 	$award = array();
 	$offer_bank = array();
 	for($offset=0;$offset<=sizeof($adjud_banks);$offset++)
@@ -66,7 +66,7 @@
 		{
 			$aw_amount[$award] = $amount;
 			$tot_award = array_sum($aw_amount);
-			$interest[$award] = $amount*$award/360;
+			$interest[$award] = floor($amount*$award/360);
 			$tot_interest = array_sum($interest);
 		}
 	}

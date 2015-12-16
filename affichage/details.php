@@ -1,8 +1,8 @@
 <?php
-    include "dbconnect.php";
-    echo "<meta charset = utf-8 />";
-    $id_history = 1;
-    $winner = "BCB";
+    session_start();
+    include_once "dbconnect.php";
+    $id_history = $_SESSION['history'];
+    $win = $_POST['winner'];
 ?>
     <!DOCTYPE html>
 <html>
@@ -10,14 +10,20 @@
     	<meta charset = "utf-8"/>
     	<link rel="stylesheet" href="style1.css" type="text/css" />
     	<link rel="stylesheet" href="style2.css" type="text/css" />
+        <link rel="stylesheet" href="style3.css" type="text/css" />
     	<title>Détails individuels-CFL</title>
     </head>
     <body>
     	<div class= "header">
     		<div id= "left">
-    			<label>Résultats d'adjudication : <?php $data = mysqli_fetch_row(mysqli_query($connect,"select name from banks where name = '$winner'"));
-    			                                        echo $partner = $data[0]; ?></label>
+    			<label>Résultats d'adjudication : <?php $data = mysqli_fetch_row(mysqli_query($connect,"select name from banks where id = '$win'"));
+    			                                        echo $winner = $data[0]; ?></label>
     		</div>
+                <div id="right">
+                    <div id="content">
+                        <a href="logout.php?logout">Liste des offres</a>
+                    </div>
+                </div>
     	</div>
     	<div class= "public" id = "letter">
     	<div>
@@ -28,7 +34,7 @@
     		<p id="date">Bujumbura, le <?php echo $full_debut;?> .</p>
     		<p><strong>Banque de la République du Burundi</strong></br>
     			Service Monétaire et financier</p></br>
-    		<p id = "partner" >A la direction de : <?php echo $partner;?></br>
+    		<p id = "partner" >A la direction de : <?php echo $winner;?></br>
     		        BUJUMBURA</p></br></br>
 
     		<strong>Objet: </strong>Résultat d'adjudication</br></br>
@@ -77,11 +83,17 @@
     		    	?>
         </table>
     </br></br>
-    <p>Votre compte courant dera crédité de <strong><?php echo number_format($tot_award,0,',',' ')." BIF au ".$full_debut; ?></strong>.</br>
-    	Au <strong><?php echo $maturity?></strong>, il sera débité du montant débité du montant retenu augmenté des intérêts soit 
-    	<strong><?php echo number_format($tot_award+$tot_interest,0,',',' '); ?></strong>.</p></br>
+    <p>Votre compte courant sera crédité de <strong><?php echo number_format($tot_award,0,',',' ')." BIF au ".$full_debut; ?></strong>.</br>
+    	Au <strong><?php echo $maturity?></strong>, il sera débité du montant retenu augmenté des intérêts soit 
+    	<strong><?php echo number_format($tot_award+$tot_interest,0,',',' ').' BIF'; ?></strong>.</p></br>
     <p>Veuillez agréer, Messieurs, l'assurance de notre considération distinguée.</p></br></br>
     <h4>BANQUE DE LA REPUBLIQUE DU BURUNDI</h4>
     </div>
+</br></br>
+    <div id="content">
+            <center>
+            <button class="log2"><a href="notifications.php">Autre Soumissionnaire</a></button></br><br>
+            </center>
+        </div>
     </body>
 </html>

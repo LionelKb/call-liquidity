@@ -10,7 +10,7 @@ if(isset($_POST['btn-save']))
 	$duree = mysqli_real_escape_string($connect,$_POST['duree']);
 	$_SESSION['history'] = $ref;
 	
-	if(mysqli_query($connect,"INSERT INTO history_offers(id,int_amount,dateh,duree) VALUES($ref,'$intervent','$dateh','$duree')"))
+	if(mysqli_query($connect,"INSERT INTO history_offers(id,int_amount,dateh,duree) VALUES('$ref','$intervent','$dateh','$duree')"))
 	{
 		?>
         <script>alert(' Appel d\'offres enregistré ');</script>
